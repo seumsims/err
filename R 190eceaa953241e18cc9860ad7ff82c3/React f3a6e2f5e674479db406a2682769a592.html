@@ -1,0 +1,1325 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>React</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f3a6e2f5-e674-479d-b406-a2682769a592" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🥋</span></div><h1 class="page-title">React</h1></header><div class="page-body"><p id="1cac884a-37f9-405e-9cd2-e6d2fccccaa2" class="">
+</p><p id="d4211425-f27b-4242-8862-ead6b5d815e2" class="">
+</p><ul id="6d3e46c8-4dbe-4ac5-891b-674963a8c593" class="toggle"><li><details open=""><summary>Index</summary><p id="329b0707-8373-4dcf-9818-bdfddf8d1272" class=""><a href="https://react.rabbil.com/tutorials">https://react.rabbil.com/</a></p><ul id="28afbce5-40e1-46e6-b0db-b5c3c4eeda68" class="toggle"><li><details open=""><summary>1		Introduction</summary><p id="0cbb4645-2748-469b-9716-9490f1a8f902" class="">
+</p></details></li></ul><ul id="7f456b4a-c62d-449a-a493-d1b8242cf519" class="toggle"><li><details open=""><summary>2		Tools &amp; UI	</summary></details></li></ul><ul id="50ce37ae-ca05-4717-b2b9-8072908bad69" class="toggle"><li><details open=""><summary>3		Boiler plate</summary><pre id="2a0cca04-f348-4a26-878b-d3ce47f662b5" class="code code-wrap"><code>npx create-react-app rock --template cra-template-pwa</code></pre></details></li></ul><ul id="ca384441-9daf-4d31-9563-f7f319aa792d" class="toggle"><li><details open=""><summary>4		Component Framework	</summary><ul id="47e24c89-caac-4604-9c31-e8b2c9edd8ba" class="toggle"><li><details open=""><summary>cdn link uses guide line for react js</summary><figure id="b268326d-bb70-4bc4-8f1e-47a8b7cc5d3d" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled.png"/></a></figure><p id="878949ea-a71a-4848-bc68-7790a3ff8fc6" class="">CDN link must be use on public folder via index.html file this is well done</p><figure id="fcf5d014-41c3-4313-918a-df8ead005b6b" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%201.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%201.png"/></a></figure><p id="2886257a-2b64-4fe7-9b7d-63697902c13d" class=""><strong>Component Framework 10:33</strong></p><figure id="1e919250-7040-4a6c-8a5e-e6486c44683b" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%202.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%202.png"/></a></figure><p id="637691bb-a850-407a-b3f2-563d0f21fabf" class="">
+</p><p id="5fbe1ef4-1e4a-4946-8461-068142e41fc9" class="">
+</p><p id="bc217f92-fd11-4d5d-9b80-c3cb999a6241" class="">
+</p></details></li></ul><ul id="57d8301d-f3af-414e-ada8-0280f76436cf" class="toggle"><li><details open=""><summary>react bootstrap set</summary><figure id="ceb1e6ee-c1e5-4811-9ac5-47aa76055790" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%203.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%203.png"/></a></figure><figure id="dc3a76d6-33a0-458b-bc86-9d80092b05a5" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%204.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%204.png"/></a></figure><figure id="74e70887-b5c3-4459-80d0-bf53747be55a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%205.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%205.png"/></a></figure><figure id="9b75c8e3-25ef-4390-8bfa-07774a2e8e3f" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%206.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%206.png"/></a></figure><figure id="ce4a5d20-6ba0-4e1b-90bd-6ed34931d801" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%207.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%207.png"/></a></figure><figure id="c43298ff-263b-4da7-bf7e-b1f268759da6" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%208.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%208.png"/></a></figure><figure id="015e5737-eeb5-495e-a6f0-1370850cec2a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%209.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%209.png"/></a></figure><figure id="32025e85-2efb-425e-94b2-c595bc985725" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2010.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2010.png"/></a></figure><figure id="1857d58d-11d8-4350-8597-e53d63d64fa4" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2011.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2011.png"/></a></figure><figure id="9a0156d4-e91c-4835-b174-2920f49e0a3d" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2012.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2012.png"/></a></figure><figure id="094d0e51-a049-4de8-8bbb-813f22ca608a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2013.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2013.png"/></a></figure><p id="f1eaec62-6530-46a8-bafc-dfef009ad6fb" class="">
+</p><p id="fab6a298-0620-46aa-b2c1-e03324565be9" class="">
+</p><p id="af4a0f28-cbfc-4609-a2f2-02e9cdd2c47b" class="">
+</p><p id="a805f691-678d-48f5-92a9-34576b290cc6" class="">
+</p><p id="f217e0bb-1b1c-4377-9bb0-f41ace0c6d6e" class="">
+</p></details></li></ul><figure id="22009c00-b998-4e25-89c5-dbfc6b538875"><a href="https://www.codeinwp.com/blog/react-ui-component-libraries-frameworks/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">20+ Best React UI Component Libraries / Frameworks for 2022</div><div class="bookmark-description">A collection of popular React UI component libraries / frameworks that help you build an awesome interface for any web project or app.</div></div><div class="bookmark-href"><img src="https://iotvnaw69daj.i.optimole.com/AXVzL2w.n2y9~6666f/w:auto/h:auto/q:mauto/f:avif/https://www.codeinwp.com/wp-content/uploads/2018/06/favicon.png" class="icon bookmark-icon"/>https://www.codeinwp.com/blog/react-ui-component-libraries-frameworks/</div></div><img src="https://iotvnaw69daj.i.optimole.com/AXVzL2w.n2y9~6666f/w:auto/h:auto/q:mauto/f:avif/https://www.codeinwp.com/wp-content/uploads/2019/02/react-ui-component-libraries-frameworks.jpg" class="bookmark-image"/></a></figure><figure id="b17be4ef-d689-43e4-85fb-03b8205ed889"><a href="https://www.google.com/search?q=react+component+framework&amp;client=firefox-b-d&amp;sxsrf=ALiCzsbqRhFTBhjM4IYu3jZNdMVxyTUiuQ%3A1653662736340&amp;ei=EOSQYpexFI_Uz7sPsoK9mAw&amp;oq=react+component+framework&amp;gs_lcp=Cgdnd3Mtd2l6EAEYADIFCAAQgAQyBggAEB4QFjIGCAAQHhAWOgQIABBHOgQIABBDOggIABAeEBYQCjoICAAQHhAPEBZKBAhBGABKBAhGGABQoQJYmRlgyiZoAHACeACAAcEBiAH5CpIBBDAuMTCYAQCgAQHIAQjAAQE&amp;sclient=gws-wiz" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">react component framework - Google Search</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?q=react+component+framework&amp;client=firefox-b-d&amp;sxsrf=ALiCzsbqRhFTBhjM4IYu3jZNdMVxyTUiuQ%3A1653662736340&amp;ei=EOSQYpexFI_Uz7sPsoK9mAw&amp;oq=react+component+framework&amp;gs_lcp=Cgdnd3Mtd2l6EAEYADIFCAAQgAQyBggAEB4QFjIGCAAQHhAWOgQIABBHOgQIABBDOggIABAeEBYQCjoICAAQHhAPEBZKBAhBGABKBAhGGABQoQJYmRlgyiZoAHACeACAAcEBiAH5CpIBBDAuMTCYAQCgAQHIAQjAAQE&amp;sclient=gws-wiz</div></div></a></figure><figure id="4eaf119c-afe3-44c4-bdda-bcf1630e984a"><a href="https://react-bootstrap.github.io/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">React-Bootstrap</div><div class="bookmark-description">The most popular front-end framework, rebuilt for React.</div></div><div class="bookmark-href"><img src="https://react-bootstrap.github.io/favicon.ico" class="icon bookmark-icon"/>https://react-bootstrap.github.io/</div></div></a></figure><p id="0bf1863b-9635-41a6-a919-40157670ff51" class="">	</p><figure id="c27ef277-ecf6-48c0-8b2f-1dff356b435d"><a href="https://www.google.com/search?client=firefox-b-d&amp;q=react+bootstrap" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">react bootstrap - Google Search</div><div class="bookmark-description">Please click here if you are not redirected within a few seconds.</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?client=firefox-b-d&amp;q=react+bootstrap</div></div></a></figure><figure id="8691a655-1d72-47e8-bad0-4459620d8903"><a href="https://www.google.com/search?client=firefox-b-d&amp;q=material-ui+react" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">material-ui react - Google Search</div><div class="bookmark-description">MUI provides a simple, customizable, and accessible library of React components. Follow your own design system, or start with Material Design.</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?client=firefox-b-d&amp;q=material-ui+react</div></div></a></figure><figure id="2273ff60-9565-4c69-9548-ed9bd884dca7"><a href="https://v4.mui.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Material-UI: A popular React UI framework</div><div class="bookmark-description">React components for faster and easier web development. Build your own design system, or start with Material Design.</div></div><div class="bookmark-href"><img src="https://v4.mui.com/static/favicon.ico" class="icon bookmark-icon"/>https://v4.mui.com/</div></div><img src="https://v4.material-ui.com/static/logo.png" class="bookmark-image"/></a></figure><figure id="b0cf108f-4a61-4077-92cf-2d163c304d24"><a href="https://www.google.com/search?client=firefox-b-d&amp;q=mdb+react" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">mdb react - Google Search</div><div class="bookmark-description">MDB Free React. The most popular UI KIT for building responsive, mobile-first websites and apps - free for personal &amp; commercial use.</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?client=firefox-b-d&amp;q=mdb+react</div></div></a></figure><figure id="c71af24f-f59e-47eb-84c7-3b095e4db405"><a href="https://mdbootstrap.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Material Design for Bootstrap 5 &amp; 4</div><div class="bookmark-description">Bootstrap Material Design free UI KIT - trusted by over 2 000 000 developers and designers. Vanilla JavaScript, Angular, React, Vue and jQuery versions.</div></div><div class="bookmark-href"><img src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/favicon.ico" class="icon bookmark-icon"/>https://mdbootstrap.com/</div></div><img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/12/mdb5-pro.jpg" class="bookmark-image"/></a></figure></details></li></ul><ul id="6ab87c16-d26c-4b0d-8672-37f66e8033f1" class="toggle"><li><details open=""><summary>5		Google Fonts</summary><p id="d6bc84bf-cf99-4fca-b247-fa901e276ed4" class="">	</p><figure id="2c75ec25-0691-4c80-b7d1-76019ca4c436"><a href="https://fonts.google.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Google Fonts</div><div class="bookmark-description">Making the web more beautiful, fast, and open through great typography</div></div><div class="bookmark-href">https://fonts.google.com/</div></div><img src="https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/opengraph_color.png" class="bookmark-image"/></a></figure><figure id="2d5c2ec8-f900-4895-afa2-cb6cf5696dc6"><a href="https://www.google.com/search?client=firefox-b-d&amp;q=google+font" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">google font - Google Search</div><div class="bookmark-description">Please click here if you are not redirected within a few seconds. Google Fonts is a computer font and web font service owned by Google. This includes free and open source font families, an interactive web directory for browsing the library, and APIs for using the fonts via CSS and Android.</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?client=firefox-b-d&amp;q=google+font</div></div></a></figure><figure id="6b3988df-f7fa-4c10-91b8-63890ed898a9" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2014.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2014.png"/></a></figure><figure id="f933267b-9b4b-45cf-97d6-51c16f0d7dd7" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2015.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2015.png"/></a></figure><figure id="18ec6ae8-f545-47a6-a648-579c9ac89991" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2016.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2016.png"/></a></figure><figure id="7405288c-2982-4e68-bdee-b24d822129c7" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2017.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2017.png"/></a></figure><figure id="b299ef60-2d51-48b0-a094-a775bdc0e154" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2018.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2018.png"/></a></figure><figure id="eb09d9fe-7a85-40ef-86eb-d1a849241353" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2019.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2019.png"/></a></figure><figure id="dedc5e41-e5d1-444b-88cd-755ad4d326e7" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2020.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2020.png"/></a></figure><figure id="40f3ae6f-72f7-44b0-af69-de4cae92fb4d" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2021.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2021.png"/></a></figure><figure id="e8ca9fb9-c9f1-42e1-a06a-db258c643763" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2022.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2022.png"/></a></figure><figure id="beae26cd-2904-4176-b5bf-6782df71d221" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2023.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2023.png"/></a></figure><figure id="41f6188e-9bab-4751-9996-6664a3653fae" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2024.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2024.png"/></a></figure><figure id="cec182fc-ca43-42ae-b0a6-550ba87b27b1" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2025.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2025.png"/></a></figure><figure id="c9ba2dab-0623-4a0c-9866-3fe05d96112d" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2026.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2026.png"/></a></figure><figure id="c770ee7e-8579-42b9-b9ab-f1edbc93bfab" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2027.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2027.png"/></a></figure><figure id="bf27e4ce-4f6b-45c2-9075-96a7035aff87" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2028.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2028.png"/></a></figure><figure id="8cac27f2-d739-4677-8747-811e941eb5f6" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2029.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2029.png"/></a></figure><p id="b10c7a9b-91e1-4a1b-a159-6e9408b650f5" class="">
+</p><p id="dde3388d-3818-4034-995b-396e427c2548" class="">
+</p><p id="59bc9dcf-af71-4771-8967-4ba0fff78d6a" class="">
+</p></details></li></ul><ul id="b4bf0dcc-24da-4ca9-b699-0f3e3fb00378" class="toggle"><li><details open=""><summary>6		Favicon &amp; Main DIV</summary><figure id="df39d462-a093-49e2-89f5-1049fa4d8f76" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2030.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2030.png"/></a></figure><figure id="e09710a9-7938-4383-b7b5-e6652a73642a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2031.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2031.png"/></a></figure><figure id="9c75450f-4d6f-4b1f-957f-b523aabc197a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2032.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2032.png"/></a></figure><p id="209859b0-60c9-41e0-ac37-fba8354d2478" class="">then App.css must be deleted</p><figure id="422072b0-429d-4b24-8018-e13d43762912" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2033.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2033.png"/></a></figure><figure id="f16f709d-4d9e-4b33-ae50-be8a518e9185" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2034.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2034.png"/></a></figure><figure id="a7d3b39a-200e-4e25-b079-74550fab2df8" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2035.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2035.png"/></a></figure><figure id="eca151eb-0ea9-4809-acb9-1b103943cc1b" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2036.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2036.png"/></a></figure><figure id="d15782ef-3875-4cfd-ab6d-39bf2252145d" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2037.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2037.png"/></a></figure><figure id="d8e12cc0-4cb5-4156-a7f8-b3854dbb85cf" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2038.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2038.png"/></a></figure><ul id="675330f8-1ddb-4a63-94bf-f48c126a73fb" class="toggle"><li><details open=""><summary>make custom favicon for react custom icons</summary><figure id="bee132c9-9aed-41a9-8781-ac21682424ed"><a href="https://www.google.com/search?q=online+favicon+generator&amp;rlz=1C1BNSD_enBD995BD995&amp;oq=online+favicon+gen&amp;aqs=chrome.0.0i512j69i57j0i512j0i22i30l6j0i390.7225j0j7&amp;sourceid=chrome&amp;ie=UTF-8" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">online favicon generator - Google Search</div><div class="bookmark-description">The ultimate favicon generator. Design your icons platform per platform and make them look great everywhere. Including in Google results pages.</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?q=online+favicon+generator&amp;rlz=1C1BNSD_enBD995BD995&amp;oq=online+favicon+gen&amp;aqs=chrome.0.0i512j69i57j0i512j0i22i30l6j0i390.7225j0j7&amp;sourceid=chrome&amp;ie=UTF-8</div></div></a></figure><figure id="6f0be9d7-54b2-42c3-be6e-a747d9db159f" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2039.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2039.png"/></a></figure><figure id="bc5aa721-58c7-4b41-b0df-b65c31389e74" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2040.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2040.png"/></a></figure><figure id="3bff9f6d-6698-4073-ac9c-9e8a092835d7" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2041.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2041.png"/></a></figure><figure id="407d455a-0311-44b2-97a5-e70d6998fd82" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2042.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2042.png"/></a></figure><figure id="5a86ffbe-186a-4a9d-9a4f-bd71ba1ba8f4" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2043.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2043.png"/></a></figure><figure id="325e6151-90a3-47ca-9dbe-5bfdf9665a70" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2044.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2044.png"/></a></figure><figure id="058ed54f-9840-493c-b7d1-bcab02af1870" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2045.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2045.png"/></a></figure><figure id="479c1263-7da9-4686-a3d8-d20ecc2ace60" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2046.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2046.png"/></a></figure><figure id="15f9b50d-ecca-48f8-9436-c06dbc6a2b18" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2047.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2047.png"/></a></figure><figure id="b9a9c634-33cc-45a8-8e5f-f94ac6782186" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2048.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2048.png"/></a></figure><figure id="1b8e2c77-e03d-4dd1-9d35-b03039f9fd40" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2049.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2049.png"/></a></figure><p id="d59b6b2a-dd59-4050-8321-8b83e64f5741" class="">shift + ctrl + r</p><figure id="5422d794-77a3-4f1c-b541-a6e16e89a104" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2050.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2050.png"/></a></figure><p id="c62ca12d-9707-40c4-9abd-2556cdf9bcf3" class="">
+</p><p id="d28c1945-e123-48a3-b0f4-f41b3dececac" class="">
+</p><p id="d44d04fa-6166-44eb-99b3-b0d3c79c3e31" class="">
+</p><p id="3e844c7d-5041-4454-a839-1bc7f50fc877" class="">
+</p></details></li></ul><p id="1d336d12-4de3-4e06-9aba-9eac0511f5c7" class="">
+</p><p id="e7b318d5-ce75-46cc-93a7-47a7ac9ae981" class="">
+</p><p id="2e0bf81a-c3d2-48b6-9fbf-7f3babc9871f" class="">
+</p><p id="2eb8ee88-f23b-4988-b362-278fda177d34" class="">
+</p><p id="f09b32d5-e686-432d-a970-c5bda26e29aa" class="">
+</p><p id="ffc3df0b-a81e-43c5-8e5c-db48f6de432f" class="">
+</p><p id="2f6ef256-7065-4ed8-bb9d-f6cf5a952618" class="">
+</p><p id="aa18c1f3-e5c8-4f09-a917-02c929479eb1" class="">
+</p><p id="c119fd25-6203-4b89-b35e-3729471a23c1" class="">
+</p><p id="a54bc422-1f73-405d-acaa-0a1ce4e01b05" class="">
+</p><p id="8e8ad781-d687-4625-97ae-26db938d90f9" class="">
+</p><p id="a8ba3406-3c21-4ec9-a078-05ae78704caf" class="">
+</p><p id="599f2ab7-73e5-4313-8f59-02c82282d6d4" class="">
+</p><p id="a67befe1-18f1-4a00-9193-d1894c31bc2a" class="">
+</p><p id="aff7f46e-3cb3-48c6-9fb7-85aefb9e1826" class="">
+</p><p id="7de4f6d0-8ff1-490b-8c54-cdfe7741d8a2" class="">
+</p><p id="8635da5e-078c-4e9d-903d-4f1a4a0b6657" class="">
+</p></details></li></ul><figure id="b279a8ca-2b54-4d91-a70d-a1d695577c7c" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2051.png"><img style="width:288px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2051.png"/></a></figure><ul id="edd8a62e-6595-4dde-8886-04ac1d665988" class="toggle"><li><details open=""><summary>7		Top banner Component	</summary><figure id="3822d902-b530-4388-b987-8d941a684d63" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2052.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2052.png"/></a></figure><p id="f7894505-2ada-4c3b-9e9f-20d179eae6f9" class=""><strong>Top banner Component 1:40s</strong></p><figure id="8111f6ab-4d15-4b0e-8aec-65f5c499432e" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2053.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2053.png"/></a></figure><figure id="622ccc9c-b770-436b-8d8b-fdeb572c9e0a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2054.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2054.png"/></a></figure><pre id="a3140688-4173-4520-9ca4-590d5c792819" class="code code-wrap"><code>import React, { Component } from &#x27;react&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;div&gt;TopBanner&lt;/div&gt;
+    )
+  }
+}</code></pre><figure id="ad3d8640-d891-4345-bdf7-1c3726efff80" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2055.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2055.png"/></a></figure><figure id="adaf35c2-dd94-490b-9b88-4532e759fdc0" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2056.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2056.png"/></a></figure><p id="5bff9874-4a60-4c39-8955-92957070cf3b" class="">4:05s</p><figure id="63c9b136-8af9-4864-8e35-ee2506fad717"><a href="https://react-bootstrap.github.io/layout/grid/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">React-Bootstrap</div><div class="bookmark-description">Bootstrap&#x27;s grid system uses a series of containers, rows, and columns to layout and align content. It&#x27;s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together. New to or unfamiliar with flexbox?</div></div><div class="bookmark-href"><img src="https://react-bootstrap.github.io/favicon.ico" class="icon bookmark-icon"/>https://react-bootstrap.github.io/layout/grid/</div></div></a></figure><figure id="45315a3f-73ee-458a-bb71-b5d2de3aa617" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2057.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2057.png"/></a></figure><figure id="9e2debce-b78b-480b-9150-74f0973d5c8a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2058.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2058.png"/></a></figure><figure id="876e5013-e697-4673-b0a0-42bafe75dc0a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2059.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2059.png"/></a></figure><pre id="428c4a26-ff4b-42e8-ab62-048fd06ec211" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import { Container } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container&gt;
+              
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="6c2ef64b-91c1-4a4b-bfdb-b0c30cfba633" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2060.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2060.png"/></a></figure><figure id="5363ed39-42b3-4994-94bb-0dd0e73330bd" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2061.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2061.png"/></a></figure><p id="5c0bd718-e971-465f-bcdd-69053b2538b8" class="">9:33s</p><figure id="e54ad4bf-2af7-46c8-9ab1-5be0b6363a08" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2062.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2062.png"/></a></figure><pre id="7d828d8c-391e-4ca1-8350-ca5d94abe7e6" class="code code-wrap"><code>.topFixedBanner {
+    background-image: url(&quot;../image/banner.jpg&quot;);
+    min-height: 500px;
+    background-attachment: fixed;
+}</code></pre><figure id="5d718219-1bba-47ee-ae0b-275355e9cc5f" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2063.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2063.png"/></a></figure><figure id="dff0e6f0-1dcb-4530-8471-d434a82b9ec0" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2064.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2064.png"/></a></figure><pre id="9befa605-e7a3-4ae2-9f2d-a4490760a4af" class="code code-wrap"><code>.topFixedBanner {
+    background-image: url(&quot;../image/banner.jpg&quot;);
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}</code></pre><figure id="0361ff13-9232-485e-a3ce-4539cae68b54" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2065.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2065.png"/></a></figure><figure id="fc2174a4-9793-4724-b68e-ca92ebb0ecaf" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2066.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2066.png"/></a></figure><pre id="0d5612a2-193c-4cef-bff6-2ebc8d250020" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import { Container } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container&gt;
+              
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="b2b1be91-23c0-40a9-ab1e-6f8100fc9164" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2067.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2067.png"/></a></figure><figure id="d81c1a21-72d5-42b6-8ab8-e0ba7f0f2873" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2068.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2068.png"/></a></figure><pre id="d1c9415c-9c97-4f8b-b641-116d9f74fa1c" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import { Container } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container className=&#x27;topFixedBanner&#x27;&gt;
+              
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="7d07fcd7-bb9a-4264-8ffc-1cb9ee67ced7" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2069.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2069.png"/></a></figure><figure id="b2b0036b-bd42-4d2a-ab85-08b70601c9d9" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2070.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2070.png"/></a></figure><pre id="c3104957-7b80-4bf8-bf27-1725ff53972a" class="code code-wrap"><code>import React from &#x27;react&#x27;;
+import TopBanner from &#x27;./components/TopBanner/TopBanner&#x27;;
+
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;TopBanner/&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre><figure id="3a0516f0-1ca3-489c-92e2-c7035aa81d51" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2071.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2071.png"/></a></figure><figure id="8acc1610-59cf-41ff-a199-dd08c152bbdb" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2072.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2072.png"/></a></figure><pre id="33cdec14-ab85-4d05-8f82-b4cee653b41f" class="code code-wrap"><code>.topFixedBanner {
+    background-image: url(&quot;../image/banner.jpg&quot;);
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.topBannerOverlay {
+    position: absolute;
+    min-height: 500px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    
+}</code></pre><figure id="37d0140a-05f0-4185-8ee8-11cbbb167b19" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2073.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2073.png"/></a></figure><pre id="4f2cc12f-2d2e-4525-bfd0-151d565541cc" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import { Container } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container className=&#x27;topFixedBanner&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="2352faee-59c6-4340-859f-b1802b3966bd" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2074.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2074.png"/></a></figure><pre id="f1dfdd4c-9a75-4b1c-9f7e-b2511493686c" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import { Container } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container className=&#x27;topFixedBanner&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;&#x27;&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="d93507eb-ea9f-47af-af39-a8bd9b7c2042"><a href="https://www.google.com/search?q=rem+unit+css&amp;rlz=1C1BNSD_enBD995BD995&amp;sxsrf=ALiCzsazSVk5y-AMFR3_KrdoYGnXVSEiDA%3A1653833606158&amp;ei=hn-TYracCb-QseMP672NmA8&amp;oq=rem+unit+c&amp;gs_lcp=Cgdnd3Mtd2l6EAEYADIECAAQQzIGCAAQHhAWMgYIABAeEBYyCAgAEB4QFhAKMggIABAeEA8QFjIGCAAQHhAWMgYIABAeEBYyBggAEB4QFjIGCAAQHhAWMgYIABAeEBY6BwgAEEcQsAM6BwgAELADEEM6CggAEOQCELADGAE6DwguENQCEMgDELADEEMYAjoFCAAQgARKBAhBGABKBAhGGAFQ_QFYowVg_AxoAXABeACAAYQBiAH8AZIBAzAuMpgBAKABAcgBEcABAdoBBggBEAEYCdoBBggCEAEYCA&amp;sclient=gws-wiz" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">https://www.google.com/search?q=rem+unit+css&amp;rlz=1C1BNSD_enBD995BD995&amp;sxsrf=ALiCzsazSVk5y-AMFR3_KrdoYGnXVSEiDA%3A1653833606158&amp;ei=hn-TYracCb-QseMP672NmA8&amp;oq=rem+unit+c&amp;gs_lcp=Cgdnd3Mtd2l6EAEYADIECAAQQzIGCAAQHhAWMgYIABAeEBYyCAgAEB4QFhAKMggIABAeEA8QFjIGCAAQHhAWMgYIABAeEBYyBggAEB4QFjIGCAAQHhAWMgYIABAeEBY6BwgAEEcQsAM6BwgAELADEEM6CggAEOQCELADGAE6DwguENQCEMgDELADEEMYAjoFCAAQgARKBAhBGABKBAhGGAFQ_QFYowVg_AxoAXABeACAAYQBiAH8AZIBAzAuMpgBAKABAcgBEcABAdoBBggBEAEYCdoBBggCEAEYCA&amp;sclient=gws-wiz</div><div class="bookmark-description">Please click here if you are not redirected within a few seconds. What Are rem Units? In CSS rem stands for &quot;root em&quot;, a unit of measurement that represents the font size of the root element. This means that 1rem equals the font size of the html element, which for most browsers has a default value of 16px.</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?q=rem+unit+css&amp;rlz=1C1BNSD_enBD995BD995&amp;sxsrf=ALiCzsazSVk5y-AMFR3_KrdoYGnXVSEiDA%3A1653833606158&amp;ei=hn-TYracCb-QseMP672NmA8&amp;oq=rem+unit+c&amp;gs_lcp=Cgdnd3Mtd2l6EAEYADIECAAQQzIGCAAQHhAWMgYIABAeEBYyCAgAEB4QFhAKMggIABAeEA8QFjIGCAAQHhAWMgYIABAeEBYyBggAEB4QFjIGCAAQHhAWMgYIABAeEBY6BwgAEEcQsAM6BwgAELADEEM6CggAEOQCELADGAE6DwguENQCEMgDELADEEMYAjoFCAAQgARKBAhBGABKBAhGGAFQ_QFYowVg_AxoAXABeACAAYQBiAH8AZIBAzAuMpgBAKABAcgBEcABAdoBBggBEAEYCdoBBggCEAEYCA&amp;sclient=gws-wiz</div></div></a></figure><figure id="03d22cd4-2e90-487a-b430-efa36cfdac2d"><a href="https://www.google.com/search?q=rem++css+unit+meaning&amp;rlz=1C1BNSD_enBD995BD995&amp;sxsrf=ALiCzsbPR2Kb3NYf0m-gxA7EgXM1ZEaOZg%3A1653833609691&amp;ei=iX-TYvzsKfmaseMP0f2WmAc&amp;ved=0ahUKEwi81cqm8oT4AhV5TWwGHdG-BXMQ4dUDCA4&amp;uact=5&amp;oq=rem++css+unit+meaning&amp;gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKABOgcIABBHELADOgcIABCwAxBDOgYIABAeEBY6CAgAEB4QDxAWOgYIABAeEAc6CAgAEB4QDxAHOggIABAeEAgQBzoICAAQHhAHEAU6BggAEB4QCDoECAAQQzoFCAAQgAQ6BQgAEJECOggIABAeEAgQDToHCCEQChCgAUoECEEYAEoECEYYAFCiA1jHwgFgysUBaAFwAXgAgAGzAYgB4A2SAQQwLjEzmAEAoAEBoAECyAEKwAEB&amp;sclient=gws-wiz" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">rem css unit meaning - Google Search</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://www.google.com/search?q=rem++css+unit+meaning&amp;rlz=1C1BNSD_enBD995BD995&amp;sxsrf=ALiCzsbPR2Kb3NYf0m-gxA7EgXM1ZEaOZg%3A1653833609691&amp;ei=iX-TYvzsKfmaseMP0f2WmAc&amp;ved=0ahUKEwi81cqm8oT4AhV5TWwGHdG-BXMQ4dUDCA4&amp;uact=5&amp;oq=rem++css+unit+meaning&amp;gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKABOgcIABBHELADOgcIABCwAxBDOgYIABAeEBY6CAgAEB4QDxAWOgYIABAeEAc6CAgAEB4QDxAHOggIABAeEAgQBzoICAAQHhAHEAU6BggAEB4QCDoECAAQQzoFCAAQgAQ6BQgAEJECOggIABAeEAgQDToHCCEQChCgAUoECEEYAEoECEYYAFCiA1jHwgFgysUBaAFwAXgAgAGzAYgB4A2SAQQwLjEzmAEAoAEBoAECyAEKwAEB&amp;sclient=gws-wiz</div></div></a></figure><figure id="a2d5c370-afda-4b0b-9517-cc38e0599852" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2075.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2075.png"/></a></figure><figure id="a3dbfb4d-2f5a-4834-87d7-efa19dea121e" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2076.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2076.png"/></a></figure><figure id="76b3b5a8-9aef-4c65-97f2-157fa41d3244" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2077.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2077.png"/></a></figure><figure id="3604dc2c-7069-4f59-8a98-70d6fd82659b" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2078.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2078.png"/></a></figure><p id="09b616c7-9d70-472f-ab3c-ccdbf4d0118c" class="">Single Row Column Import and Use</p><pre id="aa21e256-9350-4f4e-8c10-233f372efe7b" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import { Container, Row, Col } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container className=&#x27;topFixedBanner&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col&gt;
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="2918822d-1260-444d-b2cf-ca2dea65aad4" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2079.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2079.png"/></a></figure><pre id="aa36a3b1-6c93-4dbb-9396-39436cca7585" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import { Container, Row, Col } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container className=&#x27;topFixedBanner&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col&gt;
+                    &lt;h1&gt;SOFTWARE ENGINEER&lt;/h1&gt;
+                    &lt;h4&gt;Mobile And Web Application&lt;/h4&gt;
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="0d0a7b37-164f-4a2a-b24e-38795a536cbd" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2080.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2080.png"/></a></figure><figure id="3020922d-9834-41d4-8fc4-2c9c87637309"><a href="https://react-bootstrap.netlify.app/components/buttons/#buttons" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">React-Bootstrap</div><div class="bookmark-description">Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more. Use any of the available button style types to quickly create a styled button. Just modify the variant prop. For a lighter touch, Buttons also come in outline-* variants with no background color.</div></div><div class="bookmark-href"><img src="https://react-bootstrap.netlify.app/favicon.ico" class="icon bookmark-icon"/>https://react-bootstrap.netlify.app/components/buttons/#buttons</div></div></a></figure><figure id="e3d05db0-a4d0-47a9-998d-c51945e0b2ef" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2081.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2081.png"/></a></figure><figure id="1c7a2d17-9d64-4dde-9c06-94ca8e1ca0eb" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2082.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2082.png"/></a></figure><pre id="f5884f95-9dba-41fa-891e-1b3909296634" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import { Container, Row, Col, Button } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container className=&#x27;topFixedBanner&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col&gt;
+                    &lt;h1&gt;SOFTWARE ENGINEER&lt;/h1&gt;
+                    &lt;h4&gt;Mobile And Web Application&lt;/h4&gt;
+                    &lt;Button variant=&quot;outline-primary&quot;&gt;Primary&lt;/Button&gt;{&#x27; &#x27;}
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="b053e289-2699-4587-9ec1-fa5038ac9968" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2083.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2083.png"/></a></figure><figure id="80686470-eaa2-4802-aa33-85486e2dba41" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2084.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2084.png"/></a></figure><figure id="372cdda1-af4f-4a2f-8e55-881e50675f64" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2085.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2085.png"/></a></figure><figure id="5b667c6b-06f9-4cbf-9442-f9f67e8b3498" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2086.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2086.png"/></a></figure><figure id="7b181ccf-67cf-4544-a192-ac980fb79a3f" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2087.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2087.png"/></a></figure><figure id="5fcc0640-9124-4be7-a24d-7d48d888fdb1" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2088.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2088.png"/></a></figure><figure id="3ed3e503-952a-4078-b50c-3ab8e50eaffb" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2089.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2089.png"/></a></figure><figure id="a88f44c4-5316-4074-9726-4d6ae9978e7b" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2090.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2090.png"/></a></figure><figure id="15df191e-5e28-4d49-8d95-b9d85f4a61fa" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2091.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2091.png"/></a></figure><pre id="1ba618a7-ec60-4239-bd7d-c2e5114eef93" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import &#x27;../../asset/css/bootstrap.min.css&#x27;
+
+import { Container, Row, Col, Button } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container fluid={true} className=&#x27;topFixedBanner&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col&gt;
+                    &lt;h1&gt;SOFTWARE ENGINEER&lt;/h1&gt;
+                    &lt;h4&gt;Mobile And Web Application&lt;/h4&gt;
+                    &lt;Button variant=&quot;primary&quot;&gt;Primary&lt;/Button&gt;{&#x27; &#x27;}
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="36bf4f36-b93f-4dad-bcf9-c899c0331b35" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2092.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2092.png"/></a></figure><figure id="3560128b-4b26-4868-abf0-ee5bb82dd337" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2093.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2093.png"/></a></figure><figure id="11505bab-5cb2-4916-b89f-3bdfd18cb650" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2094.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2094.png"/></a></figure><figure id="722a098f-ff59-48eb-bce0-35ea9c36aa04" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2095.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2095.png"/></a></figure><figure id="ddf652ea-1228-4aad-ac09-3b0cf5d19f24" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2096.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2096.png"/></a></figure><figure id="92d5b4df-a849-4200-912b-5972cfffac04" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2097.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2097.png"/></a></figure><pre id="c6e24721-3cf8-4f3d-b783-9070c9b2ded3" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import &#x27;../../asset/css/bootstrap.min.css&#x27;
+
+import { Container, Row, Col, Button } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container fluid={true} className=&#x27;topFixedBanner p-0&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col&gt;
+                    &lt;h1&gt;SOFTWARE ENGINEER&lt;/h1&gt;
+                    &lt;h4&gt;Mobile And Web Application&lt;/h4&gt;
+                    &lt;Button variant=&quot;primary&quot;&gt;Primary&lt;/Button&gt;{&#x27; &#x27;}
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="b806f5c6-a852-4ece-aadc-53db4de8fc0d" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2098.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2098.png"/></a></figure><figure id="33889e17-8262-4004-872e-5a4a8c8bba54" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2099.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%2099.png"/></a></figure><figure id="a7672332-b31d-4020-81bf-17bcbc5674bf" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20100.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20100.png"/></a></figure><pre id="3ee52341-82e1-466b-971e-63a891fc4ec0" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import &#x27;../../asset/css/bootstrap.min.css&#x27;
+
+import { Container, Row, Col, Button } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container fluid={true} className=&#x27;topFixedBanner p-0&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col className=&#x27;text-center&#x27;&gt;
+                    &lt;h1&gt;SOFTWARE ENGINEER&lt;/h1&gt;
+                    &lt;h4&gt;Mobile And Web Application&lt;/h4&gt;
+                    &lt;Button variant=&quot;primary&quot;&gt;Primary&lt;/Button&gt;{&#x27; &#x27;}
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="602422fd-2ea5-41fa-9b1e-b7d42795bbfd" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20101.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20101.png"/></a></figure><figure id="3ef99d71-40bf-429d-80eb-8c86bcd4f5c6" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20102.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20102.png"/></a></figure><figure id="06fd0255-6e25-4fdc-8eb7-9cff5a2acffe" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20103.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20103.png"/></a></figure><pre id="4646c3b8-69b2-4131-b5e2-039362dc5b30" class="code code-wrap"><code>.topFixedBanner {
+    background-image: url(&quot;../image/banner.jpg&quot;);
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.topBannerOverlay {
+    position: absolute;
+    min-height: 500px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    
+}
+
+.topContent {
+    margin-top: 10rem;
+}
+
+.topTitle {
+    font-family: &#x27;Montserrat&#x27;, &#x27;sans-serif&#x27;;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 48px;
+}</code></pre><figure id="081985ca-3e81-40cb-94bb-d38fcf3be7f3" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20104.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20104.png"/></a></figure><figure id="3ba6cc2d-ab28-413c-9715-208645718e87" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20105.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20105.png"/></a></figure><figure id="0561d93a-7695-4835-981a-5fbbcbb81c69" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20106.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20106.png"/></a></figure><figure id="cd4817d9-ad5b-4a41-8aea-aabb680819c7"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">font-family - CSS: Cascading Style Sheets | MDN</div><div class="bookmark-description">The name of a font family. For example, &quot;Times&quot; and &quot;Helvetica&quot; are font families. Font family names containing whitespace should be quoted. For example: &quot;Comic Sans MS&quot;. Generic font families are a fallback mechanism, a means of preserving some of the style sheet author&#x27;s intent when none of the specified fonts are available.</div></div><div class="bookmark-href"><img src="https://developer.mozilla.org/favicon-48x48.cbbd161b.png" class="icon bookmark-icon"/>https://developer.mozilla.org/en-US/docs/Web/CSS/font-family</div></div><img src="https://developer.mozilla.org/mdn-social-share.cd6c4a5a.png" class="bookmark-image"/></a></figure><figure id="76d8d068-fa95-45ff-9a7a-3560ec2db84e" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20107.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20107.png"/></a></figure><figure id="bdcbcd3f-d35d-4cc0-85a8-41b1f89151a1"><a href="https://www.w3schools.com/cssref/pr_font_font-family.asp" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">https://www.w3schools.com/cssref/pr_font_font-family.asp</div><div class="bookmark-description">Specify the font for two paragraphs: Try it Yourself &quot; The font-family property specifies the font for an element. The font-family property can hold several font names as a &quot;fallback&quot; system. If the browser does not support the first font, it tries the next font.</div></div><div class="bookmark-href"><img src="https://www.w3schools.com/favicon.ico" class="icon bookmark-icon"/>https://www.w3schools.com/cssref/pr_font_font-family.asp</div></div><img src="https://www.w3schools.com/images/w3schools_logo_436_2.png" class="bookmark-image"/></a></figure><figure id="57f4646d-eb44-48da-80f5-7744b5d7e9f4" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20108.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20108.png"/></a></figure><figure id="d0476034-8129-49f4-a552-544b6e03bb7a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20109.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20109.png"/></a></figure><figure id="ac077e8e-1669-43b8-aa2d-f34e1f09b058" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20110.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20110.png"/></a></figure><figure id="796491dd-2696-4b7b-87d4-f9ebd4cb33d5" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20111.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20111.png"/></a></figure><p id="30c090c4-4e76-431c-9fd6-f15de3767b6c" class="">shift + ctrl + r</p><p id="bb545f8e-e663-4dab-aa27-ef50420d85d6" class=""> </p><figure id="e84fdf45-1772-419f-8333-a580f552ae01" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20112.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20112.png"/></a></figure><figure id="e5243281-8d45-41f1-82dd-b858c04dffe4" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20113.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20113.png"/></a></figure><figure id="8d47af3e-ad89-4049-81c4-8a959491d227" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20114.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20114.png"/></a></figure><figure id="62de725b-86a5-44ed-88cf-c0ff6e2726f0" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20115.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20115.png"/></a></figure><figure id="37389895-c3f7-42ab-8fa1-1d5076813076" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20116.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20116.png"/></a></figure><p id="e578843d-c269-41ea-9bee-836d4feedf0d" class="">Montserreat is wrong </p><p id="7a27a337-72b1-4b1d-b561-564c229b12aa" class="">with out sans serif setting font name written wrong way exposed shown on tutorial</p><figure id="c7fde894-e410-48aa-ad82-2a0dec3c8f51" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20117.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20117.png"/></a></figure><figure id="a2e90b99-041d-4f7d-811d-f5fe8683ef7f" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20118.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20118.png"/></a></figure><figure id="4501dd93-7746-4661-8506-545b359f4b3f" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20119.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20119.png"/></a></figure><figure id="b9b68779-0b98-4b02-b413-616abfabef57" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20120.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20120.png"/></a></figure><figure id="4429d122-1105-44ca-a504-0a19f22e8c83" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20121.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20121.png"/></a></figure><figure id="3a496226-f8b0-444a-9a06-8ef722c96206" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20122.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20122.png"/></a></figure><figure id="59708d64-28c5-437b-aba5-6ceb418e27b3" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20123.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20123.png"/></a></figure><pre id="01ab7a5a-f868-434b-ad7e-b63436c559f8" class="code code-wrap"><code>.topFixedBanner {
+    background-image: url(&quot;../image/banner.jpg&quot;);
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.topBannerOverlay {
+    position: absolute;
+    min-height: 500px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    
+}
+
+.topContent {
+    margin-top: 10rem;
+}
+
+.topTitle {
+    font-family: &#x27;Montserrat&#x27;, sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 48px;
+}
+
+.topSubTitle {
+    font-family: &#x27;Raleway&#x27;, sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 22px;
+}</code></pre><pre id="baf9e191-3d27-460f-8ab3-abd05118690c" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import &#x27;../../asset/css/bootstrap.min.css&#x27;
+
+import { Container, Row, Col, Button } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container fluid={true} className=&#x27;topFixedBanner p-0&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col className=&#x27;text-center&#x27;&gt;
+                    &lt;h1 className=&#x27;topTitle&#x27;&gt;SOFTWARE ENGINEER&lt;/h1&gt;
+                    &lt;h4 className=&#x27;topSubTitle&#x27;&gt;Mobile And Web Application&lt;/h4&gt;
+                    &lt;Button variant=&quot;primary&quot;&gt;Primary&lt;/Button&gt;{&#x27; &#x27;}
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="2edafea9-01f7-48d6-913f-c0801231e891" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20124.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20124.png"/></a></figure><figure id="51e7b902-6fab-45ed-b318-3406d70e5118" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20125.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20125.png"/></a></figure><figure id="10f12bf1-8e51-4d3f-a317-702f92441154" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20126.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20126.png"/></a></figure><pre id="13e71ed4-811b-4f65-add6-a12518bcda1d" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;
+import &#x27;../../asset/css/custom.css&#x27;
+import &#x27;../../asset/css/bootstrap.min.css&#x27;
+
+import { Container, Row, Col, Button } from &#x27;react-bootstrap&#x27;
+
+export default class TopBanner extends Component {
+  render() {
+    return (
+      &lt;Fragment&gt;
+          &lt;Container fluid={true} className=&#x27;topFixedBanner p-0&#x27;&gt;
+              &lt;div className=&#x27;topBannerOverlay&#x27;&gt;
+                &lt;Container className=&#x27;topContent&#x27;&gt;
+                  &lt;Row&gt;
+                    &lt;Col className=&#x27;text-center&#x27;&gt;
+                    &lt;h1 className=&#x27;topTitle&#x27;&gt;SOFTWARE ENGINEER&lt;/h1&gt;
+                    &lt;h4 className=&#x27;topSubTitle&#x27;&gt;Mobile And Web Application&lt;/h4&gt;
+                    &lt;Button variant=&quot;primary&quot;&gt;More Info&lt;/Button&gt;{&#x27; &#x27;}
+
+                    &lt;/Col&gt;
+                  &lt;/Row&gt;
+
+                &lt;/Container&gt;
+              &lt;/div&gt;
+          &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}</code></pre><figure id="f0ed0b27-3394-44db-8b34-f32d4390afea" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20127.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20127.png"/></a></figure><p id="98c2d8f1-fe1f-4a7e-96b6-6ba5ed3cac35" class="">
+</p><p id="43fb5306-6449-41f5-993c-7f8854af48f7" class="">
+</p><p id="3e68971a-bc9e-45ff-9da7-6c58ee960c30" class="">
+</p><p id="11ccb9bd-5a09-400b-b8e2-16957375fd78" class="">
+</p><p id="ada57116-29d8-4991-90d2-ec2f9e96ca6c" class="">
+</p><p id="2d2762c9-4ebd-4073-99fd-30a4d486ac55" class="">
+</p><p id="7a535396-5f45-43db-8276-6ea150e23d97" class="">
+</p><p id="1d2bfc9f-da34-45e0-a8e1-4cdd3817d600" class="">
+</p><p id="ea9a216f-9e19-40ac-8651-55fdc3660055" class="">
+</p><p id="31a1fba8-3f86-4d3a-9833-5ed91c5515e3" class="">
+</p><p id="4587d25f-c1b0-4a85-a161-f84b12261103" class="">
+</p><p id="e9b096ea-5146-4335-882b-d3b494618436" class="">
+</p><p id="eb50503c-9400-4f0f-a18a-70ecb5e6191a" class="">
+</p><p id="3944738a-588d-42f9-a74e-596285bff50d" class="">
+</p><p id="2284ff26-14b7-4b33-b0ea-790a1a1f8ae5" class="">
+</p><p id="84e4fd0a-88e6-4018-be7b-8260602d5e9a" class="">
+</p><p id="629c8872-a53a-440c-81eb-a46ae891a038" class="">
+</p><p id="74d2fb57-5548-44bf-ab24-7e7c6d8977c2" class="">
+</p><p id="2dfa71a2-cabc-4762-8dfd-04e3fec6b382" class="">
+</p><p id="3f883120-c0c0-477a-801c-ebe4ee98586c" class="">
+</p><p id="08369cfb-65f0-494b-a3b0-7a5edf8688bc" class="">
+</p><p id="7a75a504-e14f-4827-8ded-561f4d6d3434" class="">
+</p><p id="f77fe8c9-987f-4e00-9ef2-1648329df3c3" class="">
+</p><p id="777129ed-38b6-468a-a97e-d8165e286863" class="">
+</p><p id="4a0ffe8a-bf2f-49a9-a214-626c0247738d" class="">
+</p><p id="0eefa71d-2ef6-442a-9d63-ca4f6455ee04" class="">
+</p><p id="dee30799-42e3-4ade-bca7-023f8b294312" class="">
+</p><p id="6b8354ac-34a8-4390-b782-0a457a790d5e" class="">
+</p><p id="f9aa206a-59da-4248-8adc-f9fc01ba07fb" class="">
+</p><p id="868d3f22-6609-443d-b8c7-e53ef3dd8c9f" class="">
+</p><p id="f4b145bc-c1b1-4751-916a-b46b5a6150e2" class="">
+</p><p id="a2475de5-a43e-411b-9ae7-f2748b80f722" class="">
+</p><p id="450dd3fb-197e-43b2-bc8e-9d904afa2f4f" class="">
+</p><p id="b22b2b0d-5ef4-4888-bdb6-667368dcac24" class="">
+</p><p id="b59c8dd8-05cc-46f6-a48b-273d2268f026" class="">
+</p><p id="09b01bdc-ba77-4306-94ea-7dcdc2e6cec5" class="">
+</p><p id="aa3fed6b-434b-43c4-98e3-9360cd2a6dbb" class="">
+</p><p id="887aea35-0ad9-48d3-bff0-8cfc2fc7b8e6" class="">
+</p><p id="a1616a24-3806-472a-add8-a02b3054f1cd" class="">
+</p><p id="7fcd87c3-be9e-4000-9368-fbc15417bf90" class="">
+</p><p id="ea413574-fb5c-4576-8b2e-a38ad4e065f2" class="">
+</p><p id="b6e26bd9-44ec-4794-8c21-86c7e0b93d44" class="">
+</p><p id="19332d6a-370f-4935-829a-ddff02e5e64d" class="">
+</p><p id="dd4d86b8-2725-4392-9b2c-d8a3f87798a6" class="">
+</p><p id="fd5d6e8b-f7a7-4b67-8d9c-3f4bf7188a19" class="">
+</p></details></li></ul><ul id="5c0360d0-172f-4a03-876a-cdf807189c64" class="toggle"><li><details open=""><summary>8		Service Component	</summary><figure id="2902da76-0915-4868-b1c3-8fdbb7c5e052" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20128.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20128.png"/></a></figure><figure id="4cc0e542-014a-4c44-b60e-9326f26d616a" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20129.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20129.png"/></a></figure><figure id="7efc4c0b-54e2-4052-8ee0-e015e7467cb7" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20130.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20130.png"/></a></figure><figure id="aa72cf0c-a684-41a5-bc3a-22db0d3761e1" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20131.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20131.png"/></a></figure><pre id="f2b70cbb-0f9a-4bcb-abb4-81bf729b1296" class="code code-wrap"><code>import React, { Component } from &#x27;react&#x27;;
+
+class Services extends Component {
+    render() {
+        return (
+            &lt;div&gt;
+                
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default Services;</code></pre><figure id="7a7a5547-3d76-4bdd-8472-cb64f02c96e0" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20132.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20132.png"/></a></figure><figure id="1d651aa6-b8b5-47b7-890f-e6603aa8ce44" class="image"><a href="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20133.png"><img style="width:1360px" src="React%20f3a6e2f5e674479db406a2682769a592/Untitled%20133.png"/></a></figure><pre id="d05485d8-3533-443b-a7ba-42ef7f95f12b" class="code code-wrap"><code>import React, { Component, Fragment } from &#x27;react&#x27;;
+
+class Services extends Component {
+    render() {
+        return (
+            &lt;Fragment&gt;
+                
+            &lt;/Fragment&gt;
+        );
+    }
+}
+
+export default Services;</code></pre><p id="fdcf10d3-f875-4393-bef7-42f44a1ae97a" class="">1:10s</p><p id="49638540-02b5-4485-985c-34a409015276" class="">
+</p><p id="97be124d-9afe-4053-90e7-71f8d58246a8" class="">
+</p><p id="45e894bb-78fa-4466-a963-bf9a38adcf34" class="">
+</p><p id="2409e755-74d6-4138-9fb4-974588b224ae" class="">
+</p><p id="41bc239b-c201-448c-a66c-78d11c66f7ac" class="">
+</p><p id="21d287cd-87aa-41c0-9201-dad87b1d24b1" class="">
+</p><p id="54d24be3-8c58-42bf-a47e-0c54e5c0e0f9" class="">
+</p><p id="842c5964-968c-4885-adc0-8e6311bcceae" class="">
+</p><p id="bb47d442-bf10-43a2-a1d4-b349d40dea19" class="">
+</p><p id="860953e2-dd81-4d4f-aeef-b098d09c64d1" class="">
+</p><p id="9944d83e-2742-47e3-9b1b-c4b3a4a37ad5" class="">
+</p><p id="c9a02618-5f29-4b2c-bb56-71433a2973ed" class="">
+</p><p id="6cbe2a04-8cc6-4853-8172-223fb9a5437a" class="">
+</p><p id="6af0f96f-13a8-4e47-91b4-ffb327138d06" class="">
+</p><p id="62232be7-4820-40b4-9610-f6a70654d886" class="">
+</p><p id="ee16105b-9e0e-44a7-9bdd-9fd0b8f46e2e" class="">
+</p><p id="6fc9ea9e-1b6b-430c-bf60-0c80c63b86e7" class="">
+</p><p id="67e79d54-3f96-4ea0-b594-3372d2916d70" class="">
+</p><p id="ba986e3a-fe78-4806-8300-5eed26f484c8" class="">
+</p><p id="64233511-0ff0-406f-97be-c38589582860" class="">
+</p><p id="2f4c0429-185e-4ef2-b277-14e2924581dd" class="">
+</p><p id="6b55ddce-90a8-4a57-84e4-ce066097ceb0" class="">
+</p><p id="9444d0bf-9f69-4f1c-a770-4fdf160b680a" class="">
+</p><p id="c9db9327-07c8-4284-8e8d-8649e3290e1a" class="">
+</p><p id="c701f761-b81a-4718-a2c3-045d1a6c34cb" class="">
+</p><p id="b47b5abf-7770-4120-bbd2-a8d23d158f68" class="">
+</p><p id="4e6d46cb-7d14-406a-8f9f-c5e93150fcc6" class="">
+</p><p id="0f8cfa08-36d5-4314-8926-bcd1314f75b1" class="">
+</p><p id="0f5231cb-df29-41e0-899e-a6290b34c22e" class="">
+</p><p id="03251bbc-8e92-457d-b6bf-37bda8229a25" class="">
+</p><p id="97bad72e-bd9a-4ba2-bc4f-eb2e7ef8e5b8" class="">
+</p><p id="07f70b88-91b4-4f8d-9e8c-2f9e5069e44d" class="">
+</p><p id="32788a7f-dfae-454a-8aee-a522d14f9fbd" class="">
+</p><p id="ee916931-5a90-45a5-8459-a96139b46991" class="">
+</p><p id="bdc4433d-1881-4f86-b7f8-faf32f02702a" class="">
+</p><p id="f0c60dcd-847a-4601-936e-d97546828550" class="">
+</p><p id="cf81e3e3-6b85-42b4-b2e8-4276f61531f0" class="">
+</p><p id="c674acf1-16af-4c77-a46e-d1e1badc3e94" class="">
+</p><p id="c5999398-5a28-40ef-9197-b464995253dc" class="">
+</p><p id="3225916e-fccf-4020-9a24-39899f78a965" class="">
+</p><p id="17cc9019-fa7b-42a6-8c53-48936276c7c7" class="">
+</p><p id="8b9290dc-f05b-4d0d-a002-8aa0c64b2297" class="">
+</p><p id="a89b0c3f-5012-4506-8906-e532582d9f84" class="">
+</p><p id="a345b468-f9a7-4f23-9ecd-2f8e33d4fbfa" class="">
+</p><p id="2eadc68a-32f6-47de-975b-c1a2c35c44a8" class="">
+</p><p id="31d16244-13c6-4386-b169-7dbe9dfe88be" class="">
+</p><p id="23a69cdb-c670-471e-8f57-0b8cffda9679" class="">
+</p><p id="79a6cedd-4c8a-4290-99c7-d1c649715902" class="">
+</p><p id="d6383892-e85e-4317-8933-3569d91fc94b" class="">
+</p><p id="8e541d26-b933-4658-af3a-b2d813305514" class="">
+</p><p id="a39727e4-b6a4-4ae9-a2f7-11eeca6b85aa" class="">
+</p><p id="db492393-080d-42ea-93ed-7f3288824d21" class="">
+</p><p id="ce6f1cd4-fe4d-49f6-b7c7-7ec94866f4ae" class="">
+</p><p id="3f91f29d-3aa3-4f48-9d85-d2fe7247b3cc" class="">
+</p><p id="6c8e9097-bf3b-4063-b0b6-06bebe097ef0" class="">
+</p><p id="58ff591c-332a-474a-82fb-271501bc3063" class="">
+</p><p id="18a157c3-c63e-4b3a-8ea1-377036343c21" class="">
+</p><p id="724704d2-fde6-4785-a9b7-abda4120a966" class="">
+</p><p id="d90b558c-a185-40cd-89d7-bf0ef6b6c5d0" class="">
+</p><p id="d78ce75e-f26b-493a-a741-03e1daea47cf" class="">
+</p><p id="b6bdaf55-48ed-4426-9e2d-d358779dbfb9" class="">
+</p><p id="ef5d7fa6-43aa-46ef-8eb3-aa9e7729e52f" class="">
+</p><p id="6e38fa4e-09c3-40c0-bc62-739b59af760b" class="">
+</p><p id="de34065f-c7ce-48f4-89aa-6212733b91fd" class="">
+</p><p id="640f3c9e-e395-4589-923c-8a086092e4f2" class="">
+</p><p id="9f3a15fc-46b3-4a56-b413-f66b81822a87" class="">
+</p><p id="7d9f549b-4818-4e4a-adfb-a9a77c55e3d8" class="">
+</p><p id="7f5d689d-059e-438f-ae04-7b1da82f14ae" class="">
+</p><p id="98440ffe-d09e-4e8d-84d6-c1789bbbe9db" class="">
+</p><p id="64458734-2a6b-416b-ab8b-b0b039707694" class="">
+</p><p id="d57a7699-0f1c-49fa-b41f-3199fa012665" class="">
+</p><p id="1617ef95-a391-4791-b4ea-bb8a6b3ee4fb" class="">
+</p><p id="bf63089a-0edc-4559-84ca-c10868aab7eb" class="">
+</p><p id="19ee4af5-56bc-4e3b-9d3e-8ead06581631" class="">
+</p><p id="dc249248-3907-4dfe-a9c0-517c58e30658" class="">
+</p><p id="cd36997a-d19a-4d8a-a239-445a7acb8818" class="">
+</p><p id="e85f9da9-9c26-4087-a576-91c70b7cba2a" class="">
+</p><p id="2e7d31a2-f72d-4a29-9984-1f755e0e40bf" class="">
+</p><p id="a9dcf96b-4526-4108-a1d0-2f82a405b672" class="">
+</p><p id="2b1259c2-9445-4060-b2cf-892209156960" class="">
+</p><p id="2761287b-6327-479e-832a-651af092643e" class="">
+</p><p id="3fa323e7-f89a-4a09-9a92-ab303993eff4" class="">
+</p><p id="888c6994-d5fe-409c-b0b1-4156178d825d" class="">
+</p><p id="1501989d-e98e-4528-8964-e06e143985a5" class="">
+</p><p id="97ccb89b-252b-4253-8f70-97199695d74d" class="">
+</p><p id="a8569f4c-f37e-49fb-a0f1-9b542551883e" class="">
+</p><p id="ecfa5ed7-17c8-4180-9359-cbaa36f5d615" class="">
+</p><p id="5dfe702a-e158-41fd-bf4d-3b8a3002243c" class="">
+</p><p id="2e0df298-d7ad-4169-91ed-d80ae629531d" class="">
+</p><p id="a0eca090-eaea-45f6-a8c1-a70e174bde66" class="">
+</p><p id="e0ee5407-ba8e-4956-ace1-7f87cc401b52" class="">
+</p><p id="5ac792b6-79b1-4234-a29d-60c48f0bae8f" class="">
+</p><p id="919d0dc9-f33e-40be-a739-43a1e0f644f3" class="">
+</p><p id="54749e21-a053-4330-bc34-d6aea2f0efae" class="">
+</p><p id="b69507ae-ea36-40a5-b625-8e7f7e5adff6" class="">
+</p><p id="fbfa5172-4258-4b03-bf16-de7fd946122b" class="">
+</p><p id="94cd559b-d572-45c6-ba8f-392585af9d88" class="">
+</p><p id="d5f1850f-1087-4795-8bbd-e2ad70934b64" class="">
+</p><p id="1c706c77-52f1-4afc-835d-959c49ab1776" class="">
+</p><p id="99aeb7c6-b75c-44d5-ad3b-1b5295bfef69" class="">
+</p><p id="02a801cb-59f8-469e-91dd-8c8328395c57" class="">
+</p><p id="f435b842-82f8-4215-96ab-66bda4f7f615" class="">
+</p><p id="ccfab4d1-7ba6-4c4e-8aa7-dcdf51e25e9d" class="">
+</p><p id="bda905af-86ae-4836-984b-f679f2e5ebbc" class="">
+</p><p id="da69d42f-802f-4d6c-ac49-832d43c3ceb8" class="">
+</p><p id="2d3df7f5-aac8-4dca-9b7d-165194bccb86" class="">
+</p><p id="8155966d-22fe-4937-b038-b42bd35a3f76" class="">
+</p><p id="51d5a6fe-53de-4dbf-84a5-293c5ea2a72f" class="">
+</p><p id="ccc46faf-3919-434f-b741-69aefb3ef07e" class="">
+</p><p id="4111028c-5d8b-4d69-a5cd-57c533dbdd21" class="">
+</p><p id="4fa45c31-1050-41fa-b54e-35aa08908364" class="">
+</p><p id="be2d70e4-2c21-425e-b58b-c7946eb79772" class="">
+</p><p id="10127b30-2b40-4dc1-b69c-99fcaca4276e" class="">
+</p><p id="ad527a8a-66bb-4c62-a99a-62725ed63ba7" class="">
+</p><p id="62af6a89-e62e-4b48-9dbe-0628deb9ef3a" class="">
+</p><p id="01e98244-645f-4557-9d1a-047da9a41da6" class="">
+</p><p id="7d44cce5-f249-43f5-afbd-8928e2d9ead9" class="">
+</p><p id="c3684dbe-6c57-44ff-9c6d-91061cb2ac62" class="">
+</p><p id="ed51ca18-d512-48a3-a945-b6065b7b237b" class="">
+</p><p id="1276cc96-5785-4a4e-8275-86926ce633e9" class="">
+</p><p id="0febc5be-c0b5-4989-86df-7dea22877742" class="">
+</p><p id="6c8485c8-1f69-4316-948d-ec207d8a10d7" class="">
+</p><p id="4c9a6eb7-719a-4b48-8fb5-50dab53bf234" class="">
+</p></details></li></ul><p id="c8083bbe-2c0e-46ff-8abf-73cfba3e2e2b" class="">36		Fixing		
+35		Footer		
+34		Footer		
+33		Footer		
+32		Review Section		
+31		Review Section		
+30		Review Section		
+29		Video Component		
+28		Video Component		
+27		Video Component		
+26		Course Component		
+25		Course Component		
+24		Project Component		
+23		Project Component		
+22		Count Animation		
+21		Summary Component		
+20		Summary Component		
+19		Summary Component		
+18		Summary Component		
+17		Chart Component		
+16		Chart Component		
+15		Chart Component		
+14		CSS Placing		
+13		Nav Component		
+12		Nav Component		
+11		Nav Component		
+10		Nav Component		
+9		Nav Component		
+	
+	
+	
+	
+
+		
+	
+</p></details></li></ul></div></article></body></html>
